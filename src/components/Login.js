@@ -1,9 +1,19 @@
 import AuthForm from "./AuthForm"
 import React, {useState} from "react"
 
-function Login () {
+function Login ({onAuth}) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  function handleChange(e) {
+    const {value} = e.target;
+    e.target.name === 'Email' ? setEmail(value) : setPassword(value)
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    onAuth(password, email);
+  }
 
   return (
     <div className="logIn">
@@ -11,7 +21,7 @@ function Login () {
         title="Вход"
         formsName="logIn"
         buttonText="Войти"
-        onSubmit={console.log("submit")}
+        onSubmit={handleSubmit}
       >
         <input
           className="authForm__input"
@@ -21,7 +31,7 @@ function Login () {
           value={email || ''}
           minLength="6"
           maxLength="40"
-          onChange={console.log("value")}
+          onChange={handleChange}
           required
         >
         </input>
@@ -33,7 +43,7 @@ function Login () {
           value={[password] || ''}
           minLength="6"
           maxLength="40"
-          onChange={console.log("value")}
+          onChange={handleChange}
           required
         >
         </input>

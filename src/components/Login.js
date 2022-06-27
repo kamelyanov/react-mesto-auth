@@ -7,7 +7,7 @@ function Login ({onAuth}) {
 
   function handleChange(e) {
     const {value} = e.target;
-    e.target.name === 'Email' ? setEmail(value) : setPassword(value)
+    e.target.name === 'email' ? setEmail(value) : setPassword(value)
   }
 
   function handleSubmit(e) {
@@ -40,7 +40,7 @@ function Login ({onAuth}) {
           name="password"
           type="password"
           placeholder="Password"
-          value={[password] || ''}
+          value={password || ''}
           minLength="6"
           maxLength="40"
           onChange={handleChange}

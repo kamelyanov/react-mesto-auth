@@ -7,7 +7,7 @@ function Register({onRegister}) {
 
   function handleChange(e) {
     const {value} = e.target;
-    e.target.name === 'Email' ? setEmail(value) : setPassword(value)
+    e.target.name === 'email' ? setEmail(value) : setPassword(value)
   }
 
   function handleSubmit(e) {

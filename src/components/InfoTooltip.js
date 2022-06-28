@@ -8,7 +8,6 @@ function InfoTooltip ({name, isOpen, img, title, onClose}) {
         <h2 className="infoToolTip__title">{title}</h2>
         <button className="popup__button-glose edit-form__button-glose" type="button" onClick={onClose}></button>
       </div>
-
     </div>  
   )
 }

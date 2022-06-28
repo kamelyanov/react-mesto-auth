@@ -1,12 +1,12 @@
 import AuthForm from "./AuthForm"
-import React, {useState} from "react"
+import React, { useState } from "react"
 
-function Register({onRegister}) {
+function Register({ onRegister }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   function handleChange(e) {
-    const {value} = e.target;
+    const { value } = e.target;
     e.target.name === 'email' ? setEmail(value) : setPassword(value)
   }
 

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 
 import Header from './Header';
@@ -21,7 +21,7 @@ import unSuccess from '../images/unSuccess.svg'
 
 function App() {
   const history = useHistory()
-  
+
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
@@ -29,11 +29,11 @@ function App() {
   const [cards, setCards] = useState([]);
   const [currentUser, setCurrentUser] = useState({})
 
-   
+
   const [email, setEmail] = useState('')
   const [loggedIn, setLoggedIn] = useState(false)
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false)
-  
+
   const [message, setMessage] = useState({ img: '', text: '' })
 
 
@@ -43,7 +43,7 @@ function App() {
         setCards(cards)
         setCurrentUser(user)
       })
-      .catch((err) => console.log(err));  
+      .catch((err) => console.log(err));
     tokenCheck()
   }, [])
 
@@ -115,14 +115,14 @@ function App() {
       })
       .catch((err) => console.log(err))
   }
-  
+
   function tokenCheck() {
     const jwt = localStorage.getItem('jwt')
-    
-    if(jwt) {
+
+    if (jwt) {
       auth.getCheckToken(jwt)
         .then((res) => {
-          if(res) {
+          if (res) {
             setEmail(res.data.email)
             setLoggedIn(true)
             history.push('/')
@@ -132,9 +132,9 @@ function App() {
     }
   }
 
-  function handleRegistration (password, email) {
+  function handleRegistration(password, email) {
     auth.register(password, email)
-    .then((result) =>{
+      .then((result) => {
         setEmail(result.data.email)
         setMessage({ img: success, text: 'Вы успешно зарегистрировались!' })
       })
@@ -142,18 +142,18 @@ function App() {
       .finally(() => setIsInfoTooltipOpen(true))
   }
 
-   
+
   function handleAuth(password, email) {
     auth.authorize(password, email)
-    .then((token) => {
-      auth.getCheckToken(token)
-        .then((res) => {
-          setEmail(res.data.email)
-          setLoggedIn(true)
-          history.push('/')
-        })
-    })
-    .catch((err) => console.log(err))
+      .then((token) => {
+        auth.getCheckToken(token)
+          .then((res) => {
+            setEmail(res.data.email)
+            setLoggedIn(true)
+            history.push('/')
+          })
+      })
+      .catch((err) => console.log(err))
   }
 
   function onSignOut() {
@@ -164,30 +164,32 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-
-        <Header 
-        email={email} 
-        loggedIn={loggedIn}
-        onSignOut={onSignOut}
+        <Header
+          email={email}
+          loggedIn={loggedIn}
+          onSignOut={onSignOut}
         />
+
         <Switch>
-          <Route exact path="/sign-up">
+          <Route path="/sign-up">
             <Register
               onRegister={handleRegistration}
               isOpen={isEditProfilePopupOpen}
               isInfoTooltipOpen={isInfoTooltipOpen}
-            />       
-          </Route> 
-          <Route exact path="/sign-in">
-            <Login 
+            />
+          </Route>
+
+          <Route path="/sign-in">
+            <Login
               onAuth={handleAuth}
               isOpen={isEditProfilePopupOpen}
             />
           </Route>
+
           <ProtectedRoute
-            component={Main}
-            path="/"
             loggedIn={loggedIn}
+            exact path="/"
+            component={Main}
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
             onEditAvatar={handleEditAvatarClick}
@@ -195,18 +197,18 @@ function App() {
             onCardClick={onCardClick}
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
-          />         
+          />
         </Switch>
 
         <Footer />
         <div className="page__cover"></div>
 
         <InfoTooltip
-        name='infoToolTip'
-        isOpen={isInfoTooltipOpen}
-        img={message.img}
-        title={message.text}
-        onClose={closeAllPopups}
+          name='infoToolTip'
+          isOpen={isInfoTooltipOpen}
+          img={message.img}
+          title={message.text}
+          onClose={closeAllPopups}
         />
 
         <EditProfilePopup
@@ -219,7 +221,7 @@ function App() {
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
-         />
+        />
 
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}

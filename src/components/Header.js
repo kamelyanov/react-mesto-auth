@@ -27,8 +27,8 @@ function Header({email, onSignOut, loggedIn}) {
           <>
             {
               location.pathname === '/sign-up' ? 
-              <Link className="header__link" to='/sign-in'>Войти</Link> :
-              <Link className="header__link" to='/sign-up'>Регистрация</Link>
+              <Link className="header__link_active" to='/sign-in'>Войти</Link> :
+              <Link className="header__link_active" to='/sign-up'>Регистрация</Link>
             }
           </>
         

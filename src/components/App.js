@@ -20,6 +20,8 @@ import success from '../images/success.svg'
 import unSuccess from '../images/unSuccess.svg'
 
 function App() {
+  const history = useHistory()
+  
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
@@ -27,8 +29,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [currentUser, setCurrentUser] = useState({})
 
-  const history = useHistory()
-  
+   
   const [email, setEmail] = useState('')
   const [loggedIn, setLoggedIn] = useState(false)
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false)
@@ -36,14 +37,14 @@ function App() {
   const [message, setMessage] = useState({ img: '', text: '' })
 
 
-  React.useEffect(() => {
+  useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([user, cards]) => {
         setCards(cards)
         setCurrentUser(user)
       })
-      .catch((err) => console.log(err));
-      tokenCheck()  
+      .catch((err) => console.log(err));  
+    tokenCheck()
   }, [])
 
   function handleEditAvatarClick() {
@@ -63,6 +64,7 @@ function App() {
     setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
     setSelectCard(null)
+    setIsInfoTooltipOpen(false)
   }
 
   function onCardClick(card) {
@@ -200,7 +202,7 @@ function App() {
         <div className="page__cover"></div>
 
         <InfoTooltip
-        name='ToolTip'
+        name='infoToolTip'
         isOpen={isInfoTooltipOpen}
         img={message.img}
         title={message.text}

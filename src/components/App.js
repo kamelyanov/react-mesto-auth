@@ -29,15 +29,14 @@ function App() {
   const [cards, setCards] = useState([]);
   const [currentUser, setCurrentUser] = useState({})
 
-
   const [email, setEmail] = useState('')
   const [loggedIn, setLoggedIn] = useState(false)
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false)
 
   const [message, setMessage] = useState({ img: '', text: '' })
 
-
   useEffect(() => {
+    if (loggedIn) {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([user, cards]) => {
         setCards(cards)
@@ -45,7 +44,8 @@ function App() {
       })
       .catch((err) => console.log(err));
     tokenCheck()
-  }, [])
+    }  
+  }, [loggedIn])
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true)
@@ -142,7 +142,6 @@ function App() {
       .finally(() => setIsInfoTooltipOpen(true))
   }
 
-
   function handleAuth(password, email) {
     auth.authorize(password, email)
       .then((token) => {
@@ -201,7 +200,6 @@ function App() {
         </Switch>
 
         <Footer />
-        <div className="page__cover"></div>
 
         <InfoTooltip
           name='infoToolTip'

@@ -4,8 +4,8 @@ function ImagePopup(props) {
   return (
     <article className={classNamePopup}>
       <div className="image-popup">
-        <img src={props.card ? props.card.link : '#'}
-          alt={props.card ? props.card.name : ''}
+        <img src={props.card?.link}
+          alt={props.card ?.name }
           className="image-popup__photo" 
         />
         <p className="image-popup__title">

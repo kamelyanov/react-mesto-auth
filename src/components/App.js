@@ -65,6 +65,7 @@ function App() {
     setIsAddPlacePopupOpen(false)
     setSelectCard(null)
     setIsInfoTooltipOpen(false)
+    setMessage({img: '', text: ''})
   }
 
   function onCardClick(card) {
@@ -136,6 +137,7 @@ function App() {
     auth.register(password, email)
       .then((result) => {
         setEmail(result.data.email)
+        history.push('/sign-in')
         setMessage({ img: success, text: 'Вы успешно зарегистрировались!' })
       })
       .catch(() => setMessage({ img: unSuccess, text: 'Что-то пошло не так! Попробуйте ещё раз.' }))
@@ -151,8 +153,11 @@ function App() {
             setLoggedIn(true)
             history.push('/')
           })
+          .catch(() => {
+            setMessage({ img: unSuccess, text: 'Что-то пошло не так! Попробуйте ещё раз.' })
+            setIsInfoTooltipOpen(true)
+          })
       })
-      .catch((err) => console.log(err))
   }
 
   function onSignOut() {

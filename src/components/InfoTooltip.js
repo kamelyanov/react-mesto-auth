@@ -1,5 +1,5 @@
 function InfoTooltip ({name, isOpen, img, title, onClose}) {
-    const classNamePopup = `popup ${name} ${isOpen ? 'popup_opened' : ''}`
+    const classNamePopup = `popup ${name} ${isOpen && 'popup_opened'}`
   
   return (
     <div className={classNamePopup}>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from "react-router-dom"
+import { Link, Route} from "react-router-dom"
 
 function AuthForm({ title, formsName, buttonText, onSubmit, children }) {
   return (
@@ -9,7 +9,6 @@ function AuthForm({ title, formsName, buttonText, onSubmit, children }) {
         className="authForm__form"
         name={formsName}
         onSubmit={onSubmit}
-        noValidate
       >
         {children}
         <button
@@ -19,8 +18,9 @@ function AuthForm({ title, formsName, buttonText, onSubmit, children }) {
           {buttonText}
         </button>
         {
-          formsName === 'register' ?
-            <Link className='authForm__link' to='/sign-in'>Уже зарегистрированы? Войти</Link> : ''
+          <Route path='/sign-up'>
+            <Link className='authForm__link' to='/sign-in'>Уже зарегистрированы? Войти</Link>
+          </Route>
         }
       </form>
     </article>

@@ -117,6 +117,11 @@ function App() {
       .catch((err) => console.log(err))
   }
 
+  useEffect(() => {
+    tokenCheck()  
+  }, [])
+
+
   function tokenCheck() {
     const jwt = localStorage.getItem('jwt')
 
@@ -158,7 +163,6 @@ function App() {
             setIsInfoTooltipOpen(true)
           })
       })
-    .catch((err) => console.log(err))
   }
 
   function onSignOut() {

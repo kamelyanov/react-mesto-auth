@@ -158,6 +158,7 @@ function App() {
             setIsInfoTooltipOpen(true)
           })
       })
+    .catch((err) => console.log(err))
   }
 
   function onSignOut() {

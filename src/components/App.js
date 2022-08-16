@@ -121,7 +121,6 @@ function App() {
     tokenCheck()  
   }, [])
 
-
   function tokenCheck() {
     const jwt = localStorage.getItem('jwt')
 
